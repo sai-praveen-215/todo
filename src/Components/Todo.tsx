@@ -1,6 +1,6 @@
 import { Button, Col, Input, Row, Table } from "antd";
 import "../App.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 function Todo() {
   const [list, setList] = useState<any>([]);
   const [todoList, setTodoList] = useState<any>({
@@ -10,11 +10,7 @@ function Todo() {
   });
   const [isEdit, setIsEdit] = useState(false);
   const [isEditObj, setIsEditObj] = useState<any>(null);
-  const [allItemInArray, setAllItemInArray] = useState<any>({
-    initial: [],
-    processing: [],
-    completed: [],
-  });
+
   const handleAdd = () => {
     console.log(isEdit, "hiii");
     if (isEdit) {
@@ -78,31 +74,7 @@ function Todo() {
     setIsEditObj(index);
     setTodoList({ initial: item.initial, processing: "", completed: "" });
   };
-  console.log(list);
-  useEffect(() => {
-    console.log("koipppp");
-    if (list.length !== 0) {
-      list?.map((item: any) => {
-        Object.keys(item).map((keys: any) => {
-          console.log(keys, "12345");
-          if (keys === "initial") {
-            const newArray = [...allItemInArray.initial];
-            newArray.push(item[keys]);
-            setAllItemInArray({ ...allItemInArray, initial: newArray });
-          } else if (keys === "processing") {
-            const newArray2 = [...allItemInArray.processing];
-            newArray2.push(item[keys]);
-            setAllItemInArray({ ...allItemInArray, processing: newArray2 });
-          } else if (keys === "completed") {
-            const newArray3 = [...allItemInArray.completed];
-            newArray3.push(item[keys]);
-            setAllItemInArray({ ...allItemInArray, completed: newArray3 });
-          }
-        });
-      });
-    }
-  }, [list]);
-  console.log(allItemInArray, "opppp");
+
   const columns: any = [
     {
       key: "initial",
